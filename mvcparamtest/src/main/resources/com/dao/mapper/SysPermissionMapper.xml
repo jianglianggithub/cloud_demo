@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.mapper.SysPermissionMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="com.dao.entity.SysPermission">
+        <id column="id" property="id" />
+        <result column="pid" property="pid" />
+        <result column="name" property="name" />
+        <result column="value" property="value" />
+        <result column="icon" property="icon" />
+        <result column="type" property="type" />
+        <result column="uri" property="uri" />
+        <result column="status" property="status" />
+        <result column="sort" property="sort" />
+        <result column="tscreate" property="tscreate" />
+        <result column="tsedit" property="tsedit" />
+    </resultMap>
+
+    <!-- 通用查询结果列 -->
+    <sql id="Base_Column_List">
+        id, pid, name, value, icon, type, uri, status, sort, tscreate, tsedit
+    </sql>
+    <select id="selectROOT" resultMap="BaseResultMap">
+        select * from sys_permission where pid = '0'
+    </select>
+    <select id="selectByPid" resultMap="BaseResultMap">
+       select * from sys_permission where pid = #{id}
+    </select>
+
+</mapper>

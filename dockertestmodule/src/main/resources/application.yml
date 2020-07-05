@@ -1,0 +1,8 @@
+server:
+  port: 2222
+
+spring:
+  redis:
+    password: 2mSbVpO0
+    host: redis-server
+    port: 6379

@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 日志级别从低到高分为TRACE < DEBUG < INFO < WARN < ERROR < FATAL，如果设置为WARN，则低于WARN的信息都不会输出 -->
+<!-- scan:当此属性设置为true时，配置文件如果发生改变，将会被重新加载，默认值为true -->
+<!-- scanPeriod:设置监测配置文件是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒。当scan为true时，此属性生效。默认的时间间隔为1分钟。 -->
+<!-- debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态。默认值为false。 -->
+<configuration >
+    <appender name="consoleLog" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %-40.40logger{39} [%-3line] : %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <appender name="fileInfoLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--过滤-->
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>DENY</onMatch>
+            <onMismatch>ACCEPT</onMismatch>
+        </filter>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %-40.40logger{39} [%-3line] : %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>
+                ./logs/info/info.%d.log
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+    <appender name="fileErrorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--过滤-->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>ERROR</level>
+        </filter>
+        <encoder>
+            <pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %-40.40logger{39} [%-3line] : %msg%n
+            </pattern>
+        </encoder>
+        <!--滚动策略-->
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <!--路径-->
+            <fileNamePattern>
+                ./logs/error/error.%d.log
+            </fileNamePattern>
+        </rollingPolicy>
+    </appender>
+
+
+
+    <appender name="kafkaAppender" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+               <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+                   <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [service:${spring.application.name:-}]
+        [traceId:%X{X-B3-TraceId:-},spanId:%X{X-B3-SpanId:-},parentSpanId:%X{X-B3-ParentSpanId:-},exportable:%X{X-Span-Export:-}]
+        [%thread] %-5level %logger{50} - %msg%n</pattern>
+               </encoder>
+               <topic>all_logs</topic>
+               <!-- we don't care how the log messages will be partitioned  -->
+               <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.NoKeyKeyingStrategy" />
+        ​
+               <!-- use async delivery. the application threads are not blocked by logging -->
+               <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy" />
+        ​
+               <!-- each <producerConfig> translates to regular kafka-client config (format: key=value) -->
+               <!-- producer configs are documented here: https://kafka.apache.org/documentation.html#newproducerconfigs -->
+               <!-- bootstrap.servers is the only mandatory producerConfig -->
+               <producerConfig>bootstrap.servers=112.47.5.20:9091</producerConfig>
+               <!-- don't wait for a broker to ack the reception of a batch.  -->
+               <producerConfig>acks=0</producerConfig>
+               <!-- wait up to 1000ms and collect log messages before sending them as a batch -->
+               <producerConfig>linger.ms=1000</producerConfig>
+               <!-- even if the producer buffer runs full, do not block the application but start to drop messages -->
+               <producerConfig>max.block.ms=0</producerConfig>
+               <!-- define a client-id that you use to identify yourself against the kafka broker -->
+               <producerConfig>client.id=${HOSTNAME}-${CONTEXT_NAME}-logback-relaxed</producerConfig>
+           </appender>
+
+
+    <root level="INFO">
+        <appender-ref ref="kafkaAppender"/>
+        <appender-ref ref="consoleLog"/>
+        <appender-ref ref="fileInfoLog"/>
+        <appender-ref ref="fileErrorLog"/>
+    </root>
+
+</configuration>

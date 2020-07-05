@@ -1,0 +1,28 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+  cloud:
+    stream:
+      instance-count: 2
+      instance-index: 1
+      bindings:
+
+        # bindings 下的每一个 大key 可指定 不同类型的 in out 类型 所指向的 主题 destination [ exchange 或者 topic ]
+        myInput:
+          #指定输入通道对应的主题名
+          destination: minestream
+          contentType: application/json
+          # 默认情况下 不同 jvm 进程实例 如果 监听同一个 交换机的话 那么 默认是topic模式。
+          # 当属于同一个消费者组后 就是 类似于rocketmq 中的 集群消费模式。
+          group: consumerGroup1
+          consumer:
+            #通过该参数开启消费者分区功能
+            partitioned: true
+
+
+server:
+  port: 8083

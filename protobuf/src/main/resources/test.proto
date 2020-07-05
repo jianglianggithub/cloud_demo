@@ -1,0 +1,14 @@
+
+syntax = "proto3";
+import "test1.proto";
+package tutorial;
+option java_package = "com.sq.protobuf";
+option java_outer_classname = "Taaaa";
+
+message Person {
+
+   int32 id = 1;
+   string name = 2;
+     string email = 3;
+   repeated Person1 te = 4;
+}

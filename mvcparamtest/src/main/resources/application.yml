@@ -1,0 +1,33 @@
+# 连接池 配置
+druid:
+  url: jdbc:mysql://139.9.126.246:3306/lock?useUnicode=true&characterEncoding=utf8&useSSL=false&rewriteBatchedStatements=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
+  driver-class-name: com.mysql.jdbc.Driver
+  username: root
+  password: root
+  initial-size: 10
+  max-active: 50
+  min-idle: 10
+  max-wait: 60000
+  pool-prepared-statements: true
+  max-pool-prepared-statement-per-connection-size: 20
+  validation-query: SELECT 1
+  test-on-borrow: false
+  test-on-return: false
+  test-while-idle: true
+  time-between-eviction-runs-millis: 60000
+
+
+
+
+
+
+# mybatis -- plus  的基本配置
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath*:com/dao/mapper/*Mapper.xml
+
+
+
+server:
+  port: 8084

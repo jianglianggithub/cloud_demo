@@ -1,0 +1,32 @@
+# 连接池 配置
+druid:
+  url: jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8&useSSL=false&rewriteBatchedStatements=true&serverTimezone=UTC&allowPublicKeyRetrieval=true
+  driver-class-name: com.mysql.cj.jdbc.Driver
+  username: root
+  password: eBike2018)%
+  initial-size: 10
+  max-active: 50
+  min-idle: 10
+  max-wait: 60000
+  pool-prepared-statements: true
+  max-pool-prepared-statement-per-connection-size: 20
+  validation-query: SELECT 1
+  test-on-borrow: false
+  test-on-return: false
+  test-while-idle: true
+  time-between-eviction-runs-millis: 60000
+
+
+
+
+
+
+
+
+spring:
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update

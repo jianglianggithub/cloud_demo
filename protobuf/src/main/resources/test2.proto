@@ -1,0 +1,18 @@
+
+syntax = "proto3";
+
+package tutorial;
+option java_package = "com.sq.protobuf";
+option java_outer_classname = "Taaaa2";
+
+message SampleMessage {
+  // 这个oneof 关键字 用来 定义多个 类型 但是只有一个生效的。
+  oneof test_oneof {
+    string name = 1;
+    Result sub_message = 2;
+  }
+//  oneof test_oneof2 {
+//    string name1 = 3;
+//    string sub_message1 = 4;
+//  }
+}

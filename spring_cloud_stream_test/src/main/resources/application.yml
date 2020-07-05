@@ -1,0 +1,38 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+    virtual-host: /
+  cloud:
+    stream:
+      bindings:
+
+        # bindings 下的每一个 大key 可指定 不同类型的 in out 类型 所指向的 主题 destination [ exchange 或者 topic ]
+        myInput:
+          #指定输入通道对应的主题名
+          destination: minestream
+          contentType: application/json
+          # 默认情况下 不同 jvm 进程实例 如果 监听同一个 交换机的话 那么 默认是topic模式。
+          # 当属于同一个消费者组后 就是 类似于rocketmq 中的 集群消费模式。
+          group: consumerGroup1
+          consumer:
+            #通过该参数开启消费者分区功能
+            partitioned: true
+
+
+        # 正常情况下 生产者 和 消费者 也就是 输入 和输出 应该是 2个进程。这儿只是为了方便测试。
+        myOutput:
+          destination: minestream
+          contentType: application/json
+          producer:
+            partition-count: 2                                         #指定参与消息分区的消费端节点数量为2个
+            # 根据分区key 来指定 消息派发的分区
+            partition-key-expression: headers['partitionKey']
+
+      instance-count: 2
+      # 当前steam 消费者实例 是处于哪个分区中
+      instance-index: 0
+server:
+  port: 8082
