@@ -66,7 +66,7 @@ public class CodeGenerator {
         // strategy.setSuperEntityClass("com.baomidou.demo.TestEntity");
         // 自定义实体，公共字段
         // strategy.setSuperEntityColumns(new String[] { "test_id", "age" });
-        // 自定义 mapper 父类
+        // 自定义 com.mapper 父类
         // strategy.setSuperMapperClass("com.baomidou.demo.TestMapper");
         // 自定义 service 父类
         // strategy.setSuperServiceClass("com.baomidou.demo.TestService");
@@ -111,17 +111,17 @@ public class CodeGenerator {
 ////        cfg.setFileOutConfigList(focList);
 ////        mpg.setCfg(cfg);
 ////
-////        // 调整 mapper 生成目录演示
-////        focList.add(new FileOutConfig("/templates/mapper.mapper.vm") {
+////        // 调整 com.mapper 生成目录演示
+////        focList.add(new FileOutConfig("/templates/com.mapper.com.mapper.vm") {
 ////            @Override
 ////            public String outputFile(TableInfo tableInfo) {
-////                return "/develop/code/mapper/" + tableInfo.getEntityName() + ".mapper";
+////                return "/develop/code/com.mapper/" + tableInfo.getEntityName() + ".com.mapper";
 ////            }
 ////        });
 ////        cfg.setFileOutConfigList(focList);
 ////        mpg.setCfg(cfg);
 ////
-////        // 关闭默认 mapper 生成，调整生成 至 根目录
+////        // 关闭默认 com.mapper 生成，调整生成 至 根目录
 ////        TemplateConfig tc = new TemplateConfig();
 ////        tc.setXml(null);
 ////        mpg.setTemplate(tc);

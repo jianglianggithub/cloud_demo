@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
-@MapperScan(basePackages = {"com.mapper"})
+@MapperScan(basePackages = {"com.com.mapper"})
 @ComponentScan("com.*")
 @EnableTransactionManagement
 public class App {

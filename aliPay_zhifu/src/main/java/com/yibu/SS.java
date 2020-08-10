@@ -40,6 +40,8 @@ public class SS {
         f1.complete(2);
         //当提交异步回调时 任务已经完成 isDone了 那么直接 同步执行 除非是 ansyHandle xxx
         // 并且当 手动 complate的时候 也会唤醒后续 的  futre的回调
+
+        /* 就像netty的addLisitener一样 如果isDone 直接notifyLisitener */
         CompletableFuture<Object> handle = f1.handleAsync((a, e) -> {
             //也就是说为什么 get 会出现异常 是因为 他在 这个里面做了 超时检测 如果超时 直接 thow了异常 当获取的时候就会报错
             System.out.println(Thread.currentThread().getName());

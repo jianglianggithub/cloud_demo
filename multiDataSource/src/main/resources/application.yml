@@ -1,5 +1,5 @@
 mybatis:
-  mapper-locations: classpath:com/mapper/*Mapper.xml
+  mapper-locations: classpath:com/com.mapper/*Mapper.xml
   type-aliases-package: com.pojo
 
 

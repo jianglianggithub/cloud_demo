@@ -10,7 +10,10 @@ public class Futrue1 {
         //提交异步任务 有返回
         //CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> "aa");
         //提交异步任务 无返回
-        //CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> System.out.println(""));
+        CompletableFuture<Void> future1 = CompletableFuture.runAsync(() -> System.out.println(""));
+        future1.handle((a,v)->{
+         return 1;
+        });
 
         //对异步的结果  更改并且消费
         //System.out.println(future.thenApplyAsync(a -> a + "ss").get());

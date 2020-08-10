@@ -37,6 +37,9 @@
         <module>protobuf</module>
         <module>leetcode</module>
         <module>mongodb_demo</module>
+        <module>mybatiste</module>
+        <module>wxdemo</module>
+        <module>letcode</module>
 
 
     </modules>

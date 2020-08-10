@@ -15,7 +15,7 @@ import java.util.List;
 
 @SpringBootApplication
 @RestController
-@MapperScan(basePackages = {"com.dao.mapper"})
+@MapperScan(basePackages = {"com.dao.com.mapper"})
 public class App {
     public static void main(String[] args) {
         SpringApplication.run(App.class,args);

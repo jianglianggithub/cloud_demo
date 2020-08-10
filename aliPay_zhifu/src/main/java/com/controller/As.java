@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
@@ -62,7 +63,29 @@ public class As {
         return "aa";
     }
 
+    @RequestMapping("/asdasd")//RedirectAttributes
+    @ResponseBody
+    public String asdasd(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        Cookie aa = new Cookie("qwer", "11");
+        aa.setDomain("yasdas1231es.com");
+        aa.setPath("/");
+        aa.setMaxAge(-1);
+        response.addCookie(aa);
+        return "aa";
+    }
+    @RequestMapping("/asdasd2")//RedirectAttributes
+    @ResponseBody
+    public String asdasd2(HttpServletResponse response, HttpServletRequest request) throws IOException {
+        Cookie[] cookies = request.getCookies();
+        if (cookies != null) {
+            for (int i = 0; i < cookies.length; i++) {
+                System.out.println(cookies[i].getName()+"  "+cookies[i].getValue());
+                System.out.println(cookies[i].getPath()+"  "+cookies[i].getDomain());
+            }
+        }
 
+        return "aa";
+    }
     @RequestMapping("/asd")
     public void asd(HttpServletResponse response) {
         long l = System.currentTimeMillis();

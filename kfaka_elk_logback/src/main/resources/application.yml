@@ -16,3 +16,6 @@ spring:
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
   application:
     name: testmodule
+jasypt:
+  encryptor:
+    password: csp #根密码

@@ -1,6 +1,9 @@
 package com;
 
+import com.ulisesbocchio.jasyptspringboot.encryptor.DefaultLazyEncryptor;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
+import org.jasypt.encryption.StringEncryptor;
+import org.springframework.core.env.StandardEnvironment;
 import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Component;
 
@@ -14,5 +17,10 @@ public class ConsumerDemo {
                 record.offset(),
                 record.value()
         );
+    }
+
+
+    public static void main(String[] args) {
+
     }
 }

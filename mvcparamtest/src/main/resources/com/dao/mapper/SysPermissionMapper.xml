@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.dao.mapper.SysPermissionMapper">
+<!DOCTYPE com.mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-com.mapper.dtd">
+<com.mapper namespace="com.dao.com.mapper.SysPermissionMapper">
 
     <!-- 通用查询映射结果 -->
     <resultMap id="BaseResultMap" type="com.dao.entity.SysPermission">
@@ -28,4 +28,4 @@
        select * from sys_permission where pid = #{id}
     </select>
 
-</mapper>
+</com.mapper>
